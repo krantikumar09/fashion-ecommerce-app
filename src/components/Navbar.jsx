@@ -4,7 +4,7 @@ import { assets } from "../assets/assets";
 
 const Navbar = () => {
   return (
-    <div className="Navbar">
+    <div className="Navbar py-2">
       <div className="navbar p-0">
         <div className="navbar-start">
           <div className="dropdown">
@@ -44,13 +44,13 @@ const Navbar = () => {
             </ul>
           </div>
           <a
-            className="text-2xl font-[800] text-black flex items-center gap-4"
+            className="text-xl sm:text-2xl font-[800] text-black flex items-center gap-2 sm:gap-4"
             href="/"
           >
             <img
               src={assets.logo}
               alt="logo"
-              className="w-[30px] h-[28px] object-contain"
+              className="w-[18px] h-[20px] sm:w-[30px] sm:h-[28px] object-contain"
             />
             FASHION
           </a>
@@ -100,24 +100,24 @@ const Navbar = () => {
             <img
               src={assets.search_icon}
               alt="search"
-              className="w-5 cursor-pointer"
+              className="w-4 sm:w-5 cursor-pointer"
             />
 
             <div className="group relative">
               <img
                 src={assets.profile_icon}
-                className="w-5 cursor-pointer"
+                className="w-4 sm:w-5 cursor-pointer"
                 alt="user"
               />
               <div className="group-hover:block hidden absolute droupdown-menu right-0 pt-4">
                 <div className="flex flex-col gap-2 w-36 py-3 px-5 text-navbar-text bg-white shadow-xl rounded-md">
-                  <p className="cursor-pointer py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                  <p className="text-xs sm:text-base cursor-pointer py-1 sm:py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
                     My Profile
                   </p>
-                  <p className="cursor-pointer py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                  <p className="text-xs sm:text-base cursor-pointer py-1 sm:py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
                     Orders
                   </p>
-                  <p className="cursor-pointer py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                  <p className="text-xs sm:text-base cursor-pointer py-1 sm:py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
                     Logout
                   </p>
                 </div>
@@ -127,7 +127,7 @@ const Navbar = () => {
               <img
                 src={assets.cart_icon}
                 alt="cart"
-                className="w-5 min-w-5 cursor-pointer"
+                className="w-4 sm:w-5 min-w-4 cursor-pointer"
               />
               <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
                 10
