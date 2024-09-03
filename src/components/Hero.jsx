@@ -11,7 +11,7 @@ const Hero = () => {
             <span className="relative bg-white">let's</span> explore <span className="relative bg-gold">unique</span> clothes.
           </h1>
           <p className="text-sm sm:text-base text-black font-normal mb-4">Live for Influential and Innovative fashion!</p>
-          <a href="#collection" className="btn btn-sm sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black">Shop Now</a>
+          <a href="#newArrival" className="btn btn-sm sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black">Shop Now</a>
         </div>
         {/* right */}
         <div  className="text-center">
