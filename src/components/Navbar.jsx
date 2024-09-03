@@ -1,4 +1,6 @@
-import React from "react";
+import "../App.css";
+import { Link, NavLink } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Navbar = () => {
   return (
@@ -6,7 +8,7 @@ const Navbar = () => {
       <div className="navbar p-0">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="pe-4 lg:hidden">
+            <div tabIndex={0} role="button" className="pe-4 md:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -15,6 +17,7 @@ const Navbar = () => {
                 stroke="currentColor"
               >
                 <path
+                  color="#242323"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
@@ -27,47 +30,110 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Home</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a>Original</a>
+                <NavLink to="/collection">Collection</NavLink>
               </li>
               <li>
-                <a>Movies</a>
+                <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <a>Series</a>
-              </li>
-              <li>
-                <a>Search</a>
+                <NavLink to="/contact">Contact</NavLink>
               </li>
             </ul>
           </div>
-          <a className="text-xl font-[700] text-txt-color">MOVIES4U</a>
+          <a
+            className="text-2xl font-[800] text-black flex items-center gap-4"
+            href="/"
+          >
+            <img
+              src={assets.logo}
+              alt="logo"
+              className="w-[30px] h-[28px] object-contain"
+            />
+            FASHION
+          </a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="flex gap-7">
-            <li>
-              <a>Home</a>
+        <div className="navbar-center hidden md:flex">
+          <ul className="flex gap-8">
+            <li className="flex flex-col items-center">
+              <NavLink
+                to="/"
+                className="text-base font-medium cursor-pointer text-navbar-text relative"
+              >
+                Home
+                <hr className="w-2/4 border-none h-[1.5px] bg-navbar hidden" />
+              </NavLink>
             </li>
-            <li>
-              <a>Original</a>
+            <li className="flex flex-col items-center">
+              <NavLink
+                to="/collection"
+                className="text-base font-medium cursor-pointer text-navbar-text relative"
+              >
+                Collection
+                <hr className="w-2/4 border-none h-[1.5px] bg-navbar hidden" />
+              </NavLink>
             </li>
-            <li>
-              <a>Movies</a>
+            <li className="flex flex-col items-center">
+              <NavLink
+                to="/about"
+                className="text-base font-medium cursor-pointer text-navbar-text relative"
+              >
+                About
+                <hr className="w-2/4 border-none h-[1.5px] bg-navbar hidden" />
+              </NavLink>
             </li>
-            <li>
-              <a>Series</a>
-            </li>
-            <li>
-              <a>Search</a>
+            <li className="flex flex-col items-center">
+              <NavLink
+                to="/contact"
+                className="text-base font-medium cursor-pointer text-navbar-text relative"
+              >
+                Contact
+                <hr className="w-2/4 border-none h-[1.5px] bg-navbar hidden" />
+              </NavLink>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="cursor-pointer">
-            <button className="btn">Sign In</button>
-          </a>
+          <div className="flex items-center gap-6">
+            <img
+              src={assets.search_icon}
+              alt="search"
+              className="w-5 cursor-pointer"
+            />
+
+            <div className="group relative">
+              <img
+                src={assets.profile_icon}
+                className="w-5 cursor-pointer"
+                alt="user"
+              />
+              <div className="group-hover:block hidden absolute droupdown-menu right-0 pt-4">
+                <div className="flex flex-col gap-2 w-36 py-3 px-5 text-navbar-text bg-white shadow-xl rounded-md">
+                  <p className="cursor-pointer py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                    My Profile
+                  </p>
+                  <p className="cursor-pointer py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                    Orders
+                  </p>
+                  <p className="cursor-pointer py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                    Logout
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Link to="/cart" className="relative">
+              <img
+                src={assets.cart_icon}
+                alt="cart"
+                className="w-5 min-w-5 cursor-pointer"
+              />
+              <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+                10
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
