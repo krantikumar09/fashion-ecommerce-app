@@ -1,10 +1,17 @@
 import "../App.css";
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
+
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  
+  
+
   return (
-    <div className="Navbar py-2">
+    <div className="Navbar py-2 border-b border-gray">
       <div className="container mx-auto px-4">
         <div className="navbar p-0">
           <div className="navbar-start">
@@ -99,6 +106,7 @@ const Navbar = () => {
           <div className="navbar-end">
             <div className="flex items-center gap-6">
               <img
+                onClick={() => setShowSearch(true)}
                 src={assets.search_icon}
                 alt="search"
                 className="w-4 sm:w-5 cursor-pointer"
@@ -131,7 +139,7 @@ const Navbar = () => {
                   className="w-4 sm:w-5 min-w-4 cursor-pointer"
                 />
                 <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-                  10
+                  {getCartCount()}
                 </p>
               </Link>
             </div>

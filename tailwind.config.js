@@ -23,6 +23,9 @@ export default {
     "./src/components/Download.jsx",
     "./src/components/Newsletter.jsx",
     "./src/components/Footer.jsx",
+    "./src/pages/Collection.jsx",
+    "./src/components/SearchBar.jsx",
+    "./src/pages/Products.jsx"
   ],
   theme: {
     extend: {

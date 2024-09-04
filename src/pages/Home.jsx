@@ -24,7 +24,6 @@ const Home = () => {
         <Download/>
       </div>
       <Newsletter/>
-      <Footer/>
     </div>
   );
 };

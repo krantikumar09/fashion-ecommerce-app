@@ -3,8 +3,8 @@ import { assets } from "../assets/assets";
 
 const Hero = () => {
   return (
-    <div className="Hero">
-      <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-5 bg-hero rounded-[20px] sm:rounded-[30px] md:rounded-[40px] px-2 pt-4 sm:pt-0 ms:px-4 md:px-6 min-h-[86vh]">
+    <div className="Hero mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-5 bg-hero rounded-[20px] sm:rounded-[30px] md:rounded-[40px] px-2 pt-4 sm:pt-0 ms:px-4 md:px-6 min-h-[82vh]">
         {/* left */}
         <div className=" ">
           <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl text-black font-extrabold leading-normal sm:leading-normal md:leading-snug uppercase mb-4">
