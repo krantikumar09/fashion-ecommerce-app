@@ -23,14 +23,6 @@ const Download = () => {
             />
           </div>
         </div>
-
-        <div className="text-center">
-          <img
-            src={assets.download_img}
-            className="w-[340px] h-1/2 mx-auto" 
-            alt="mobile app"
-          />
-        </div>
       </div>
     </div>
   );
