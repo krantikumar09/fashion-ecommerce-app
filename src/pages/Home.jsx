@@ -7,7 +7,6 @@ import HomeBanner from "../components/HomeBanner";
 import Favourite from "../components/Favourite";
 import Download from "../components/Download";
 import Newsletter from "../components/Newsletter";
-import Footer from "../components/Footer";
 
 const Home = () => {
   return (
