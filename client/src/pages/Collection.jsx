@@ -33,9 +33,7 @@ const Collection = () => {
     let productsCopy = products.slice();
 
     if (showSearch && search) {
-      productsCopy = productsCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      );
+      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
     }
 
     if (category.length > 0) {
@@ -53,29 +51,30 @@ const Collection = () => {
     setFilterProducts(productsCopy);
   };
 
-  const sortProduct = () => {
+  const sortProduct=  () => {
     let fqCopy = filterProducts.slice();
 
     switch (sortType) {
-      case "low-high":
-        setFilterProducts(fqCopy.sort((a, b) => a.price - b.price));
+      case 'low-high':
+        setFilterProducts(fqCopy.sort((a, b) => (a.price - b.price)))
         break;
-      case "high-low":
-        setFilterProducts(fqCopy.sort((a, b) => b.price - a.price));
+      case 'high-low':
+        setFilterProducts(fqCopy.sort((a, b) => (b.price - a.price)))
         break;
       default:
         applyFilter();
         break;
     }
-  };
-
+  } 
+ 
   useEffect(() => {
     applyFilter();
   }, [category, subCategory, search, showSearch]);
 
   useEffect(() => {
     sortProduct();
-  }, [sortType]);
+  },[sortType])
+
 
   return (
     <div className="collection mt-8">
@@ -99,7 +98,7 @@ const Collection = () => {
             {/* category filter */}
             <div
               className={`border border-gray-300 pl-5 py-3 mt-6 ${
-                showFilter ? "" : "hidden"
+                showFilter ? "" : "hidden" 
               } sm:block`}
             >
               <p className="mb-3 text-md font-medium text-black capitalize">

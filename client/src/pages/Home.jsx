@@ -17,12 +17,12 @@ const Home = () => {
         <LatestCollection />
         <BestSeller />
       </div>
-      <HomeBanner />
+      <HomeBanner/>
       <div className="container mx-auto px-4">
-        <Favourite />
-        <Download />
+        <Favourite/>
+        <Download/>
       </div>
-      <Newsletter />
+      <Newsletter/>
     </div>
   );
 };

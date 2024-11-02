@@ -8,7 +8,7 @@ import { ShopContext } from "../context/ShopContext";
 const PlaceOrder = () => {
   const [method, setMethod] = useState("cod");
 
-  const { navigate } = useContext(ShopContext);
+  const { navigate } = useContext(ShopContext)
 
   return (
     <div className="place-order mt-12">
@@ -132,10 +132,7 @@ const PlaceOrder = () => {
               </div>
 
               <div className="w-full text-end mt-8">
-                <button
-                  onClick={() => navigate("/orders")}
-                  className="btn rounded-none sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black uppercase"
-                >
+                <button onClick={() => navigate('/orders')} className="btn rounded-none sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black uppercase">
                   place order
                 </button>
               </div>

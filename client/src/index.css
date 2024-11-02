@@ -24,6 +24,7 @@ ul {
   list-style: none;
 }
 
-a.active hr {
+a.active hr{
   display: block;
 }
+

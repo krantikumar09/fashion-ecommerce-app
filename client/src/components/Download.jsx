@@ -5,9 +5,7 @@ const Download = () => {
     <div className="downlod mt-32 mb-20">
       <div className="grid grid-cols-1 sm:grid-cols-2 items-center  gap-5">
         <div className="text-center sm:text-left">
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-black font-extrabold uppercase leading-normal mb-3">
-            Download app & get the voucher!
-          </h2>
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-black font-extrabold uppercase leading-normal mb-3">Download app & get the voucher!</h2>
           <p className="text-md font-normal text-black leading-normal mb-4">
             Get 30% off for first transaction using Rondovision mobile app for
             now.

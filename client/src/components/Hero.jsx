@@ -8,21 +8,13 @@ const Hero = () => {
         {/* left */}
         <div className=" ">
           <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl text-black font-extrabold leading-normal sm:leading-normal md:leading-snug uppercase mb-4">
-            <span className="relative bg-white">let's</span> explore{" "}
-            <span className="relative bg-gold">unique</span> clothes.
+            <span className="relative bg-white">let's</span> explore <span className="relative bg-gold">unique</span> clothes.
           </h1>
-          <p className="text-sm sm:text-base text-black font-normal mb-4">
-            Live for Influential and Innovative fashion!
-          </p>
-          <a
-            href="#newArrival"
-            className="btn btn-sm sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black"
-          >
-            Shop Now
-          </a>
+          <p className="text-sm sm:text-base text-black font-normal mb-4">Live for Influential and Innovative fashion!</p>
+          <a href="#newArrival" className="btn btn-sm sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black">Shop Now</a>
         </div>
         {/* right */}
-        <div className="text-center">
+        <div  className="text-center">
           <img src={assets.hero} alt="hero" className="" />
         </div>
       </div>

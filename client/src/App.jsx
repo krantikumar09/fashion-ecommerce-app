@@ -12,13 +12,14 @@ import Orders from "./pages/Orders";
 import SearchBar from "./components/SearchBar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-function App() {
+import 'react-toastify/dist/ReactToastify.css'
+
+const App = () => {
   return (
     <div className="App">
-      <ToastContainer />
+      <ToastContainer/>
       <Navbar />
-      <SearchBar />
+      <SearchBar/>
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -31,9 +32,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/orders" element={<Orders />} />
       </Routes>
-      <Footer />
+      <Footer/>
     </div>
   );
-}
+};
 
 export default App;

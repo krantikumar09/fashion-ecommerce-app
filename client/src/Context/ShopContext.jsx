@@ -3,7 +3,6 @@ import { products, offerProducts } from "../assets/assets.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
@@ -65,7 +64,7 @@ const ShopContextProvider = (props) => {
     setCartItems(cartData);
   };
 
-  const getCartAmount = () => {
+  const getCartAmount =  () => {
     let totalAmount = 0;
 
     for (const items in cartItems) {
@@ -99,7 +98,7 @@ const ShopContextProvider = (props) => {
     getCartCount,
     updateQuantity,
     getCartAmount,
-    navigate,
+    navigate
   };
 
   return (
@@ -108,4 +107,4 @@ const ShopContextProvider = (props) => {
   );
 };
 
-export { ShopContextProvider };
+export default ShopContextProvider;
