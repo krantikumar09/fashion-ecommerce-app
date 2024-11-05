@@ -7,6 +7,7 @@ import Orders from "./pages/Orders";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const currency = "$";

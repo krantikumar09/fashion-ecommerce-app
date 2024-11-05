@@ -1,12 +1,58 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
+import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const [currentState, setCurrentState] = useState("Sign Up");
-
+  const [currentState, setCurrentState] = useState("Login");
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+
+    try {
+      if (currentState === "Sign Up") {
+        const res = await axios.post(backendUrl + "api/user/register", {
+          name,
+          email,
+          password,
+        });
+
+        if (res.data.success) {
+          setToken(res.data.token);
+          localStorage.setItem("token", res.data.token);
+          toast.success(res.data.message);
+        } else {
+          toast.error(res.data.message);
+        }
+      } else {
+        const res = await axios.post(backendUrl + "api/user/login", {
+          email,
+          password,
+        });
+
+        if (res.data.success) {
+          setToken(res.data.token);
+          localStorage.setItem("token", res.data.token);
+          toast.success(res.data.message);
+        } else {
+          toast.error(res.data.message);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token]);
 
   return (
     <form
@@ -30,6 +76,8 @@ const Login = () => {
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
           </svg>
           <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             type="text"
             className="grow text-sm text-black font-normal"
             placeholder="Name"
@@ -49,6 +97,8 @@ const Login = () => {
           <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
         </svg>
         <input
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
           type="text"
           className="grow text-sm text-black font-normal"
           placeholder="Email"
@@ -70,9 +120,11 @@ const Login = () => {
           />
         </svg>
         <input
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
           type="password"
           className="grow text-sm text-black font-normal"
-          value="password"
+          placeholder="Password"
           required
         />
       </label>
