@@ -8,7 +8,9 @@ const currency = "inr";
 const deliveryCharge = 10;
 
 // gateway initialize
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(
+  "sk_test_51PDVPTSGMYHKuMaHH95p2TE9AnFeEd69xdCdSzzsV75gXUXFeMdSca4bC6ktfOoD7WeHzxsDrQJLOuI2r1ZLmgWh00GUBpCcH3"
+);
 
 const razorpayInstance = new razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -157,12 +159,12 @@ const verifyRazorpay = async (req, res) => {
     const { userId, razorpay_order_id } = req.body;
 
     const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
-    if (orderInfo.status === 'paid') {
+    if (orderInfo.status === "paid") {
       await orderModel.findByIdAndUpdate(orderInfo.receipt, { payment: true });
-      await userModel.findByIdAndUpdate(userId, { cartData: {}});
-      res.json({ success: true, message: "Payment successful."});
-    }else {
-      res.json({ success: false, message: "Payment failed."});
+      await userModel.findByIdAndUpdate(userId, { cartData: {} });
+      res.json({ success: true, message: "Payment successful." });
+    } else {
+      res.json({ success: false, message: "Payment failed." });
     }
   } catch (error) {
     console.log(error);

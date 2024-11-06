@@ -6,7 +6,6 @@ import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Cursor } from "mongoose";
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState("cod");
