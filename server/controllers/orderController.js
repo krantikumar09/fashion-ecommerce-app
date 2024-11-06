@@ -10,11 +10,13 @@ const currency = "inr";
 const deliveryCharge = 10;
 
 // gateway initialize
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(
+  "sk_test_51PDVPTSGMYHKuMaHH95p2TE9AnFeEd69xdCdSzzsV75gXUXFeMdSca4bC6ktfOoD7WeHzxsDrQJLOuI2r1ZLmgWh00GUBpCcH3"
+);
 
 const razorpayInstance = new razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
+  key_id: "rzp_test_F04tDXQtAYGRLz",
+  key_secret: "VmUqptnhkv3LmMSOsEZxedEJ",
 });
 
 // placeing order using cod
