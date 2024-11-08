@@ -33,7 +33,9 @@ const Collection = () => {
     let productsCopy = products.slice();
 
     if (showSearch && search) {
-      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
 
     if (category.length > 0) {
@@ -51,45 +53,44 @@ const Collection = () => {
     setFilterProducts(productsCopy);
   };
 
-  const sortProduct=  () => {
+  const sortProduct = () => {
     let fqCopy = filterProducts.slice();
 
     switch (sortType) {
-      case 'low-high':
-        setFilterProducts(fqCopy.sort((a, b) => (a.price - b.price)))
+      case "low-high":
+        setFilterProducts(fqCopy.sort((a, b) => a.price - b.price));
         break;
-      case 'high-low':
-        setFilterProducts(fqCopy.sort((a, b) => (b.price - a.price)))
+      case "high-low":
+        setFilterProducts(fqCopy.sort((a, b) => b.price - a.price));
         break;
       default:
         applyFilter();
         break;
     }
-  } 
- 
+  };
+
   useEffect(() => {
     applyFilter();
   }, [category, subCategory, search, showSearch, products]);
 
   useEffect(() => {
     sortProduct();
-  },[sortType])
-
+  }, [sortType]);
 
   return (
     <div className="collection mt-8">
       <div className="container mx-auto px-4">
         <Title title={"All Collection"} />
-        <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 mb-20">
+        <div className="flex flex-col md:flex-row gap-1 sm:gap-10 pt-10 mb-20">
           {/* filter option */}
-          <div className="min-w-56 mb-5 sm:mb-0">
+          <div className="min-w-52 mb-5 sm:mb-0">
             <p
               onClick={() => setShowFilter(!showFilter)}
               className="my-2 text-xl font-medium flex items-center text-black cursor-pointer gap-2 uppercase"
             >
               filters{" "}
               <img
-                className={`h-3 sm:hidden ${showFilter ? "rotate-90" : ""}`}
+                className={`h-3 md:hidden ${showFilter ? "rotate-90" : ""}`}
                 src={assets.dropdown_icon}
                 alt=""
               />
@@ -98,8 +99,8 @@ const Collection = () => {
             {/* category filter */}
             <div
               className={`border border-gray-300 pl-5 py-3 mt-6 ${
-                showFilter ? "" : "hidden" 
-              } sm:block`}
+                showFilter ? "" : "hidden"
+              } md:block`}
             >
               <p className="mb-3 text-md font-medium text-black capitalize">
                 categories
@@ -107,33 +108,42 @@ const Collection = () => {
 
               <div className="flex flex-col gap-2 text-sm font-normal text-gray-700">
                 <p className="flex gap-2">
-                  <input
-                    className="w-3"
-                    type="checkbox"
-                    value={"Men"}
-                    onChange={toggleCategory}
-                  />{" "}
-                  Men
+                  <label htmlFor="men" className="cursor-pointer">
+                    <input
+                      className="w-3"
+                      type="checkbox"
+                      value={"Men"}
+                      onChange={toggleCategory}
+                      id="men"
+                    />{" "}
+                    Men
+                  </label>
                 </p>
 
                 <p className="flex gap-2">
-                  <input
-                    className="w-3"
-                    type="checkbox"
-                    value={"Women"}
-                    onChange={toggleCategory}
-                  />{" "}
-                  Women
+                  <label htmlFor="women" className="cursor-pointer">
+                    <input
+                      id="women"
+                      className="w-3"
+                      type="checkbox"
+                      value={"Women"}
+                      onChange={toggleCategory}
+                    />{" "}
+                    Women
+                  </label>
                 </p>
 
                 <p className="flex gap-2">
-                  <input
-                    className="w-3"
-                    type="checkbox"
-                    value={"Kids"}
-                    onChange={toggleCategory}
-                  />{" "}
-                  Kids
+                  <label htmlFor="kids" className="cursor-pointer">
+                    <input
+                      id="kids"
+                      className="w-3"
+                      type="checkbox"
+                      value={"Kids"}
+                      onChange={toggleCategory}
+                    />{" "}
+                    Kids
+                  </label>
                 </p>
               </div>
             </div>
@@ -142,7 +152,7 @@ const Collection = () => {
             <div
               className={`border border-gray-300 pl-5 py-3 mt-6 ${
                 showFilter ? "" : "hidden"
-              } sm:block`}
+              } md:block`}
             >
               <p className="mb-3 text-md font-medium text-black capitalize">
                 sub categories
@@ -150,33 +160,42 @@ const Collection = () => {
 
               <div className="flex flex-col gap-2 text-sm font-normal text-gray-700">
                 <p className="flex gap-2">
-                  <input
-                    className="w-3"
-                    type="checkbox"
-                    value={"Topwear"}
-                    onChange={toggleSubCategory}
-                  />{" "}
-                  Topwear
+                  <label htmlFor="topwear" className="cursor-pointer">
+                    <input
+                      id="topwear"
+                      className="w-3"
+                      type="checkbox"
+                      value={"Topwear"}
+                      onChange={toggleSubCategory}
+                    />{" "}
+                    Topwear
+                  </label>
                 </p>
 
                 <p className="flex gap-2">
-                  <input
-                    className="w-3"
-                    type="checkbox"
-                    value={"Bottomwear"}
-                    onChange={toggleSubCategory}
-                  />{" "}
-                  Bottomwear
+                  <label htmlFor="bottomwear" className="cursor-pointer">
+                    <input
+                    id="bottomwear"
+                      className="w-3"
+                      type="checkbox"
+                      value={"Bottomwear"}
+                      onChange={toggleSubCategory}
+                    />{" "}
+                    Bottomwear
+                  </label>
                 </p>
 
                 <p className="flex gap-2">
+                  <label htmlFor="winterwear" className="cursor-pointer">
                   <input
+                  id="winterwear"
                     className="w-3"
                     type="checkbox"
                     value={"Winterwear"}
                     onChange={toggleSubCategory}
                   />{" "}
                   Winterwear
+                  </label>
                 </p>
               </div>
             </div>
@@ -197,7 +216,7 @@ const Collection = () => {
             </div>
 
             {/* map products */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 gap-y-6">
+            <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-5 gap-y-6">
               {filterProducts.map((item, index) => (
                 <ProductItem
                   key={index}

@@ -72,8 +72,8 @@ const placeOrderStripe = async (req, res) => {
           name: item.name,
         },
         unit_amount: item.price * 100,
-        quantity: item.quantity,
       },
+      quantity: item.quantity,
     }));
 
     line_items.push({
@@ -84,6 +84,7 @@ const placeOrderStripe = async (req, res) => {
         },
         unit_amount: deliveryCharge * 100,
       },
+      quantity: 1,
     });
 
     const session = await stripe.checkout.sessions.create({
@@ -114,7 +115,7 @@ const verifyStripe = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message });
+    res.json({ success: false, message: "Something went wrong! Try again." });
   }
 };
 
@@ -151,8 +152,8 @@ const placeOrderRazorpay = async (req, res) => {
       res.json({ success: true, order });
     });
   } catch (error) {
-    console.log(error);
-    res.json({ success: falses, message: error.message });
+    console.log("error in placeOrderRazorpay: ", error);
+    res.json({ success: false, message: "Something went wrong! Try again." });
   }
 };
 
@@ -189,7 +190,7 @@ const allOrders = async (req, res) => {
 const userOrders = async (req, res) => {
   try {
     const { userId } = req.body;
-    const orders = await userId.find({ userId });
+    const orders = await orderModel.find({ userId });
     res.json({ success: true, orders });
   } catch (error) {
     console.log(error);

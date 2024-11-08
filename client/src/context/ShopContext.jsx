@@ -7,7 +7,7 @@ import axios from "axios";
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
-  const currency = "$";
+  const currency = "\u20B9";
   const delivery_fee = 10;
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [search, setSearch] = useState("");
@@ -39,11 +39,15 @@ const ShopContextProvider = (props) => {
     setCartItems(cartData);
     if (token) {
       try {
-        await axios.post(
-          backendUrl + "api/cart/add",
+        const res = await axios.post(
+          backendUrl + "/api/cart/add",
           { itemId, size },
           { headers: { token } }
         );
+
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
       } catch (error) {
         console.log(error);
         toast.error(error.message);
@@ -78,7 +82,7 @@ const ShopContextProvider = (props) => {
     if (token) {
       try {
         await axios.post(
-          backendUrl + "api/cart/update",
+          backendUrl + "/api/cart/update",
           { itemId, size, quantity },
           { headers: { token } }
         );
@@ -111,7 +115,7 @@ const ShopContextProvider = (props) => {
 
   const getProductsData = async () => {
     try {
-      const res = await axios.get(backendUrl + "api/product/list");
+      const res = await axios.get(backendUrl + "/api/product/list");
       if (res.data.success) {
         setProducts(res.data.products);
       } else {
@@ -126,7 +130,7 @@ const ShopContextProvider = (props) => {
   const getUserCart = async (token) => {
     try {
       const res = await axios.post(
-        backendUrl + "api/cart/get",
+        backendUrl + "/api/cart/get",
         {},
         { headers: { token } }
       );
@@ -138,6 +142,7 @@ const ShopContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+
 
   useEffect(() => {
     getProductsData();

@@ -16,7 +16,7 @@ const Newsletter = () => {
             <input
               type="text"
               placeholder="Enter your email here..."
-              className="input w-full max-w-xs"
+              className="input w-full max-w-xs text-base text-black font-normal"
             />
             <button
               to="/collection"

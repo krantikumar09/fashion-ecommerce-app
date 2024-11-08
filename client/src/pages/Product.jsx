@@ -38,7 +38,7 @@ const Product = () => {
                   onClick={() => setImage(item)}
                   src={item}
                   key={index}
-                  className="w-[28%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
+                  className="w-[28%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer gap-2 sm:gap-0"
                   alt=""
                 />
               ))}
@@ -61,11 +61,11 @@ const Product = () => {
               <img src={assets.star_dull_icon} alt="" className="w-3" />
               <p className="pl-2">(122)</p>
             </div>
-            <p className="mt-5 text-3xl font-medium">
+            <p className="mt-5 text-2xl xs:text-3xl font-medium">
               {currency}
               {productData.price}
             </p>
-            <p className="mt-5 text-navbar-text font-normal text-sm sm:text-base md:w-4/5">
+            <p className="mt-5 text-navbar-text font-normal text-xs xs:text-base leading-normal md:w-4/5">
               {productData.description}
             </p>
 
@@ -77,7 +77,7 @@ const Product = () => {
                 {productData.sizes.map((item, index) => (
                   <button
                     onClick={() => setSize(item)}
-                    className={`border py-2 px-4 bg-slate-100 text-sm font-medium text-black ${
+                    className={`border py-1 xs:py-2 px-2 xs:px-4 bg-slate-100 text-xs sm:text-sm font-medium text-black ${
                       item === size ? "border-gold" : ""
                     }`}
                     key={index}
@@ -90,7 +90,7 @@ const Product = () => {
 
             <button
               onClick={() => addToCart(productData._id, size)}
-              className="mt-5 btn btn-sm sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black outline-none border-none uppercase rounded-none"
+              className=" btn btn-sm sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none uppercase "
             >
               add to cart
             </button>
@@ -122,7 +122,7 @@ const Product = () => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4  px-2 sm:px-6 py-4 text-sm">
+          <div className="flex flex-col gap-4  px-2 sm:px-6 py-4 text-sm leading-normal">
             <p>
               An e-commerce website is an online platform that facilitates the
               buying and selling of products or services over the internet. It

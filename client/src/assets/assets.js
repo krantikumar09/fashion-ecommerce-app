@@ -81,9 +81,10 @@ import logo from "./fevicon.svg";
 import titlePattern from "./title-pattern.svg";
 import homeBanner from "./home_banner_img.png";
 import download_img from "./download_img.svg";
-import app_store_img from "./app_store_img.png"
-import play_store_img from "./play_store_img.png"
-import banner_img from "./banner_img.jpg"
+import app_store_img from "./app_store_img.png";
+import play_store_img from "./play_store_img.png";
+import banner_img from "./banner_img.jpg";
+import user from "./user.png"
 
 export const assets = {
   logo,
@@ -110,7 +111,8 @@ export const assets = {
   download_img,
   app_store_img,
   play_store_img,
-  banner_img
+  banner_img,
+  user
 };
 
 export const offerProducts = [
@@ -119,6 +121,7 @@ export const offerProducts = [
     name: "Hoodies & Sweetshirt",
     description: "Explore More",
     image: [p_img53],
+    categoryName: "hoodie and sweetshirt",
     category: "Women",
     subCategory: "Topwear",
     newarrival: true,
@@ -128,6 +131,7 @@ export const offerProducts = [
     name: "Coats & Parkas",
     description: "Explore More",
     image: [p_img54],
+    categoryName: "coats and parks",
     category: "Women",
     subCategory: "Topwear",
     newarrival: true,
@@ -137,6 +141,7 @@ export const offerProducts = [
     name: "Tees & T-Shirt",
     description: "Explore More",
     image: [p_img55],
+    categoryName: "tees and t-shirts",
     category: "Women",
     subCategory: "Topwear",
     newarrival: true,

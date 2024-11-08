@@ -16,7 +16,7 @@ const RelatedProducts = ({ category, subCategory}) => {
             productCopy = productCopy.filter((item) => category === item.category);
             productCopy = productCopy.filter((item) => subCategory === item.subCategory);
             
-            setRelated(productCopy.slice(0, 4))
+            setRelated(productCopy.slice(0, 5))
 
         }
 

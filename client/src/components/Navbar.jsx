@@ -124,19 +124,24 @@ const Navbar = () => {
               />
 
               <div className="group relative">
-                <img
-                  onClick={() => (token ? null : navigate("/login"))}
-                  src={assets.profile_icon}
-                  className="w-4 sm:w-5 cursor-pointer"
-                  alt="user"
-                />
+                <Link to="/myprofile">
+                  <img
+                    onClick={() => (token ? null : navigate("/login"))}
+                    src={assets.profile_icon}
+                    className="w-4 sm:w-5 cursor-pointer"
+                    alt="user"
+                  />
+                </Link>
                 {token && (
                   <div className="group-hover:block hidden absolute droupdown-menu right-0 pt-4">
                     <div className="flex flex-col gap-2 w-36 py-3 px-5 text-navbar-text bg-white shadow-xl rounded-md">
                       <p className="text-xs sm:text-base cursor-pointer py-1 sm:py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
                         My Profile
                       </p>
-                      <p onClick={()=> navigate("/orders")} className="text-xs sm:text-base cursor-pointer py-1 sm:py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md">
+                      <p
+                        onClick={() => navigate("/orders")}
+                        className="text-xs sm:text-base cursor-pointer py-1 sm:py-2 px-1 text-navbar-text hover:text-white hover:bg-navbar rounded-md"
+                      >
                         Orders
                       </p>
                       <p

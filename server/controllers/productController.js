@@ -8,10 +8,12 @@ const addProduct = async (req, res) => {
       name,
       description,
       price,
+      categoryName,
       category,
       subCategory,
       sizes,
       bestseller,
+      trending,
     } = req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
@@ -35,10 +37,12 @@ const addProduct = async (req, res) => {
     const productData = {
       name,
       description,
+      categoryName,
       category,
       subCategory,
       price: Number(price),
       bestseller: bestseller === "true" ? true : false,
+      trending: trending === "true" ? true : false,
       sizes: JSON.parse(sizes),
       image: imagesUrl,
       date: Date.now(),
@@ -58,37 +62,54 @@ const addProduct = async (req, res) => {
 
 // list product
 const listProducts = async (req, res) => {
-    try {
-        const products = await productModel.find({});
+  try {
+    const products = await productModel.find({});
 
-        res.json({ success: true, products});
-    } catch (error) {
-        console.log("List product: ", error);
-        res.json({ success: false, message: "Something went wrong!"});
-    }
+    res.json({ success: true, products });
+  } catch (error) {
+    console.log("List product: ", error);
+    res.json({ success: false, message: "Something went wrong!" });
+  }
 };
 
 // remove product
 const removeProduct = async (req, res) => {
-    try {
-        await productModel.findByIdAndDelete(req.body.id);
-        res.json({ success: true, message: "Product removed!"});
-    } catch (error) {
-        console.log("remove product: ", error);
-        res.json({ success: false, message: "Somwthing went wrong!"});
-    }
+  try {
+    await productModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "Product removed!" });
+  } catch (error) {
+    console.log("remove product: ", error);
+    res.json({ success: false, message: "Somwthing went wrong!" });
+  }
 };
 
 // single product info
 const singleProduct = async (req, res) => {
-    try {
-        const { productId } = req.body;
-        const product = await productModel.findById(productId);
-        res.json({ success: true, product});
-    } catch (error) {
-        console.log("single product: ", error);
-        res.json({ success: false, message: "Something went wrong!"});
-    }
+  try {
+    const { productId } = req.body;
+    const product = await productModel.findById(productId);
+    res.json({ success: true, product });
+  } catch (error) {
+    console.log("single product: ", error);
+    res.json({ success: false, message: "Something went wrong!" });
+  }
 };
 
-export { addProduct, listProducts, removeProduct, singleProduct };
+const specialProduct = async (req, res) => {
+  try {
+    const { categoryName } = req.query;
+
+    if (!categoryName) {
+      return res.json({ success: false, message: "category is required."});
+    }
+
+    const product = await productModel.find({ categoryName }) ;
+    res.json({ success: true, product})
+
+  } catch (error) {
+    console.log("special product: ", error);
+    res.json({ success: false, message: "Something went wrong!" });
+  }
+}
+
+export { addProduct, listProducts, removeProduct, singleProduct, specialProduct };

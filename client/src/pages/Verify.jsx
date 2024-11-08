@@ -18,7 +18,7 @@ const Verify = () => {
       }
 
       const res = await axios.post(
-        backendUrl + "api/order/verifyStripe",
+        backendUrl + "/api/order/verifyStripe",
         { success, orderId },
         { headers: { token } }
       );
@@ -38,7 +38,14 @@ const Verify = () => {
   useEffect(() => {
     verifyPayment();
   }, [token]);
-  return <div>Verify</div>;
+  return (
+    <div className="verify">
+      <div className="container mx-auto text-center">
+        <h1 className="text-2xl font-bold text-black">Your order is verifing...</h1>
+        <p className="text-base text-slate-500">Please wait</p>
+      </div>
+    </div>
+  );
 };
 
 export default Verify;

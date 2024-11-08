@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       if (currentState === "Sign Up") {
-        const res = await axios.post(backendUrl + "api/user/register", {
+        const res = await axios.post(backendUrl + "/api/user/register", {
           name,
           email,
           password,
@@ -29,7 +29,7 @@ const Login = () => {
           toast.error(res.data.message);
         }
       } else {
-        const res = await axios.post(backendUrl + "api/user/login", {
+        const res = await axios.post(backendUrl + "/api/user/login", {
           email,
           password,
         });
@@ -37,6 +37,7 @@ const Login = () => {
         if (res.data.success) {
           setToken(res.data.token);
           localStorage.setItem("token", res.data.token);
+          navigate("/");
           toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
@@ -57,7 +58,7 @@ const Login = () => {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-navbar-text min-h-screen"
+      className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-8 gap-4 text-navbar-text min-h-screen"
     >
       <div className="inline-flex items-center gap-2 mb-12 mt-10">
         <Title title={currentState} />
@@ -79,7 +80,7 @@ const Login = () => {
             onChange={(e) => setName(e.target.value)}
             value={name}
             type="text"
-            className="grow text-sm text-black font-normal"
+            className="grow text-base text-black font-normal"
             placeholder="Name"
             required
           />
@@ -100,7 +101,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="text"
-          className="grow text-sm text-black font-normal"
+          className="grow text-base text-black font-normal"
           placeholder="Email"
           required
         />
@@ -123,14 +124,20 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
-          className="grow text-sm text-black font-normal"
+          className="grow text-base text-black font-normal"
           placeholder="Password"
           required
         />
       </label>
 
-      <div className="w-full flex justify-between text-sm mt-[-4px]">
-        <p className="cursor-pointer">Forgot your password</p>
+      <div className="w-full flex justify-between text-sm">
+        {
+          currentState === "Login" ? (
+            <p className="cursor-pointer">Forgot your password</p>
+          ): (
+            <p></p>
+          )
+        }
         {currentState === "Login" ? (
           <p
             onClick={() => setCurrentState("Sign Up")}

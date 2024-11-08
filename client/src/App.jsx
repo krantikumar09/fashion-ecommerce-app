@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Verify from "./pages/Verify";
+import MyProfile from "./pages/MyProfile";
+import SpecialProduct from "./pages/SpecialProduct";
 
 const App = () => {
   return (
@@ -32,7 +34,9 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/verify" element={<Verify />} />
+        <Route path="/myprofile" element={<MyProfile />} />
+        <Route path="/Verify" element={<Verify />} />
+        <Route path="/special/:categoryName" element={<SpecialProduct />} />
       </Routes>
       <Footer />
     </div>

@@ -7,6 +7,7 @@ import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
+import profileRoute from "./routes/profileRoute.js";
 
 // app config
 const app = express();
@@ -23,11 +24,12 @@ app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRouter);
 app.use('/api/order', orderRouter);
+app.use('/api', profileRoute);
 
 app.get("/", (req, res) => {
   res.send("API working...");
 });
 
 app.listen(port, () => {
-  console.log("Server is running...");
+  console.log(`Server is running on port: ${port}`);
 });

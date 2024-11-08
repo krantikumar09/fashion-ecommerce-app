@@ -18,7 +18,7 @@ const NewArrival = () => {
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-5 mt-16">
             {
                 newArrivalProduct.map((item, index) => (
-                    <NewArrivalItem key={index} id={item._id} image={item.image} name={item.name} text={item.description}/>
+                    <NewArrivalItem key={index} id={item._id} image={item.image} name={item.name} text={item.description} categoryName={item.categoryName}/>
                 ))
             }
         </div>

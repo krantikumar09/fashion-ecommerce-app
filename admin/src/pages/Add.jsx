@@ -14,9 +14,11 @@ const Add = ({ token }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [categoryName, setCategoryName] = useState("hoodie and sweetshirt");
   const [category, setCategory] = useState("Men");
   const [subCategory, setSubCategory] = useState("Topwear");
   const [bestseller, setBestseller] = useState(false);
+  const [trending, setTrending] = useState(false);
   const [sizes, setSizes] = useState([]);
 
   const handleSizeClick = (size) => {
@@ -35,9 +37,11 @@ const Add = ({ token }) => {
       formData.append("name", name);
       formData.append("description", description);
       formData.append("price", price);
+      formData.append("categoryName", categoryName);
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("bestseller", bestseller);
+      formData.append("trending", trending);
       formData.append("sizes", JSON.stringify(sizes));
 
       image1 && formData.append("image1", image1);
@@ -45,7 +49,7 @@ const Add = ({ token }) => {
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
 
-      const res = await axios.post(backendUrl + "api/product/add", formData, {
+      const res = await axios.post(backendUrl + "/api/product/add", formData, {
         headers: { token },
       });
 
@@ -56,6 +60,7 @@ const Add = ({ token }) => {
         setPrice("");
         setSizes("");
         setBestseller("");
+        setTrending("");
         setImage1("");
         setImage2("");
         setImage3("");
@@ -173,6 +178,20 @@ const Add = ({ token }) => {
         <div>
           <h5 className="mb-2 text-md text-black font-medium">Category</h5>
           <select
+            onChange={(e) => setCategoryName(e.target.value)}
+            value={categoryName}
+            className="select select-bordered text-sm text-slate-500 font-medium w-full max-w-xs"
+          >
+            <option disabled>Category Name</option>
+            <option value="hoodie and sweetshirt">Hoode & Sweetshirt</option>
+            <option value="coats and parks">Coats & Parks</option>
+            <option value="tees and t-shirts">Tees & T-Shirts</option>
+          </select>
+        </div>
+
+        <div>
+          <h5 className="mb-2 text-md text-black font-medium">Category</h5>
+          <select
             onChange={(e) => setCategory(e.target.value)}
             value={category}
             className="select select-bordered text-sm text-slate-500 font-medium w-full max-w-xs"
@@ -232,6 +251,18 @@ const Add = ({ token }) => {
         />
         <label className="cursor-pointer" htmlFor="bestseller">
           Add to bestseller
+        </label>
+      </div>
+
+      <div className="flex gap-2 mt-2 flex-wrap">
+        <input
+          onChange={() => setTrending((prev) => !prev)}
+          checked={trending}
+          type="checkbox"
+          id="trending"
+        />
+        <label className="cursor-pointer" htmlFor="trending">
+          Add to trending
         </label>
       </div>
 
