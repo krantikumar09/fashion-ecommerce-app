@@ -217,15 +217,21 @@ const Collection = () => {
 
             {/* map products */}
             <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-5 gap-y-6">
-              {filterProducts.map((item, index) => (
-                <ProductItem
-                  key={index}
-                  id={item._id}
-                  image={item.image}
-                  name={item.name}
-                  price={item.price}
-                />
-              ))}
+              {
+                filterProducts.length > 0 ? (
+                  filterProducts.map((item, index) => (
+                    <ProductItem
+                      key={index}
+                      id={item._id}
+                      image={item.image}
+                      name={item.name}
+                      price={item.price}
+                    />
+                  ))
+                ) : (
+                  <h4 className="font-medium text-xl sm:text-2xl">No results found.</h4>
+                )
+              }
             </div>
           </div>
         </div>
