@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 
 const Hero = () => {
@@ -11,11 +11,11 @@ const Hero = () => {
             <span className="relative bg-white">let's</span> explore <span className="relative bg-gold">unique</span> clothes.
           </h1>
           <p className="text-sm xs:text-base text-black font-normal mb-4">Live for Influential and Innovative fashion!</p>
-          <a href="#newArrival" className="btn btn-sm sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black">Shop Now</a>
+          <Link to="/collection" className="btn  sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black">Shop Now</Link>
         </div>
         {/* right */}
         <div  className="text-center">
-          <img src={assets.hero} alt="hero" className="" />
+          <img src={assets.hero} alt="hero" className="" loading="lazy"/>
         </div>
       </div>
     </div>

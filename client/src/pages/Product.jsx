@@ -40,12 +40,13 @@ const Product = () => {
                   key={index}
                   className="w-[28%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer gap-2 sm:gap-0"
                   alt=""
+                  loading="lazy"
                 />
               ))}
             </div>
 
             <div className="w-full sm:w-[80%]">
-              <img className="w-full h-auto" src={image} alt="" />
+              <img className="w-full h-auto" src={image} alt="" loading="lazy" />
             </div>
           </div>
 
@@ -54,10 +55,10 @@ const Product = () => {
             <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
 
             <div className="flex items-center gap-1 mt-2">
-              <img src={assets.star_icon} alt="" className="w-3" />
-              <img src={assets.star_icon} alt="" className="w-3" />
-              <img src={assets.star_icon} alt="" className="w-3" />
-              <img src={assets.star_icon} alt="" className="w-3" />
+              <img src={assets.star_icon} alt="" className="w-3" loading="lazy" />
+              <img src={assets.star_icon} alt="" className="w-3" loading="lazy" />
+              <img src={assets.star_icon} alt="" className="w-3" loading="lazy"/>
+              <img src={assets.star_icon} alt="" className="w-3" loading="lazy"/>
               <img src={assets.star_dull_icon} alt="" className="w-3" />
               <p className="pl-2">(122)</p>
             </div>
@@ -77,7 +78,7 @@ const Product = () => {
                 {productData.sizes.map((item, index) => (
                   <button
                     onClick={() => setSize(item)}
-                    className={`border py-1 xs:py-2 px-2 xs:px-4 bg-slate-100 text-xs sm:text-sm font-medium text-black ${
+                    className={`border py-2 px-4 bg-slate-100 text-xs sm:text-sm font-medium text-black ${
                       item === size ? "border-gold" : ""
                     }`}
                     key={index}
@@ -90,9 +91,9 @@ const Product = () => {
 
             <button
               onClick={() => addToCart(productData._id, size)}
-              className=" btn btn-sm sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none uppercase "
+              className="btn sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black outline-none border-none capitalize"
             >
-              add to cart
+              Add to Cart
             </button>
 
             <hr className="mt-8 sm:w-4/5 text-slate-200" />

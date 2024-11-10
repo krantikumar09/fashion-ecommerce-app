@@ -15,11 +15,17 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
+  const [skeletonLoading, setSkeletonLoading] = useState(true);
   const navigate = useNavigate();
 
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Select size");
+      return;
+    }
+
+    if (!token) {
+      navigate('/login');
       return;
     }
 
@@ -175,6 +181,8 @@ const ShopContextProvider = (props) => {
     token,
     setCartItems,
     getUserCart,
+    skeletonLoading,
+    setSkeletonLoading
   };
 
   return (

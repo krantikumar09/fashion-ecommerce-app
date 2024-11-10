@@ -1,10 +1,8 @@
-import React from "react";
-import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 
 const HomeBanner = () => {
   return (
-    <div className="Home-Banner bg-bannerImg bg-center bg-cover w-full min-h-[400px] h-full mt-32 mb-20">
+    <div className="Home-Banner bg-[url('./assets/banner_img.jpg')] bg-center bg-cover w-full min-h-[400px] h-full mt-32 mb-20">
       <div className="container mx-auto px-4">
         <div className="pt-10 text-right">
             <h1 className="text-2xl sm:text-4xl md:text-5xl text-black font-extrabold leading-normal sm:leading-normal md:leading-snug uppercase mb-4">

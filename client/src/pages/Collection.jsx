@@ -4,9 +4,12 @@ import Title from "../components/Title";
 import { assets } from "../assets/assets";
 import ProductItem from "../components/ProductItem";
 import Newsletter from "../components/Newsletter";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Collection = () => {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, search, showSearch, skeletonLoading, setSkeletonLoading } =
+    useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -19,6 +22,8 @@ const Collection = () => {
     } else {
       setCategory((prev) => [...prev, e.target.value]);
     }
+
+    setSkeletonLoading(false);
   };
 
   const toggleSubCategory = (e) => {
@@ -27,6 +32,7 @@ const Collection = () => {
     } else {
       setSubCategory((prev) => [...prev, e.target.value]);
     }
+    setSkeletonLoading(false);
   };
 
   const applyFilter = () => {
@@ -51,6 +57,7 @@ const Collection = () => {
     }
 
     setFilterProducts(productsCopy);
+    setSkeletonLoading(false);
   };
 
   const sortProduct = () => {
@@ -93,6 +100,7 @@ const Collection = () => {
                 className={`h-3 md:hidden ${showFilter ? "rotate-90" : ""}`}
                 src={assets.dropdown_icon}
                 alt=""
+                loading="lazy"
               />
             </p>
 
@@ -175,7 +183,7 @@ const Collection = () => {
                 <p className="flex gap-2">
                   <label htmlFor="bottomwear" className="cursor-pointer">
                     <input
-                    id="bottomwear"
+                      id="bottomwear"
                       className="w-3"
                       type="checkbox"
                       value={"Bottomwear"}
@@ -187,14 +195,14 @@ const Collection = () => {
 
                 <p className="flex gap-2">
                   <label htmlFor="winterwear" className="cursor-pointer">
-                  <input
-                  id="winterwear"
-                    className="w-3"
-                    type="checkbox"
-                    value={"Winterwear"}
-                    onChange={toggleSubCategory}
-                  />{" "}
-                  Winterwear
+                    <input
+                      id="winterwear"
+                      className="w-3"
+                      type="checkbox"
+                      value={"Winterwear"}
+                      onChange={toggleSubCategory}
+                    />{" "}
+                    Winterwear
                   </label>
                 </p>
               </div>
@@ -217,21 +225,35 @@ const Collection = () => {
 
             {/* map products */}
             <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-5 gap-y-6">
-              {
-                filterProducts.length > 0 ? (
-                  filterProducts.map((item, index) => (
-                    <ProductItem
-                      key={index}
-                      id={item._id}
-                      image={item.image}
-                      name={item.name}
-                      price={item.price}
-                    />
+              {skeletonLoading ? (
+                Array(10) 
+                  .fill()
+                  .map((_, index) => (
+                    <div key={index} className="flex flex-col items-center">
+                      <Skeleton
+                        height={150}
+                        width="100%"
+                        className="rounded-md"
+                      />{" "}
+                      <Skeleton height={20} width="80%" className="mt-2 rounded-md" />{" "}
+                      <Skeleton height={20} width="60%" className="mt-1" />{" "}
+                    </div>
                   ))
-                ) : (
-                  <h4 className="font-medium text-xl sm:text-2xl">No results found.</h4>
-                )
-              }
+              ) : filterProducts.length > 0 ? (
+                filterProducts.map((item, index) => (
+                  <ProductItem
+                    key={index}
+                    id={item._id}
+                    image={item.image}
+                    name={item.name}
+                    price={item.price}
+                  />
+                ))
+              ) : (
+                <h4 className="font-medium text-xl sm:text-2xl">
+                  No results found.
+                </h4>
+              )}
             </div>
           </div>
         </div>

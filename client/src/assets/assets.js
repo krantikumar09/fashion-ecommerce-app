@@ -80,11 +80,11 @@ import cross_icon from "./cross_icon.png";
 import logo from "./fevicon.svg";
 import titlePattern from "./title-pattern.svg";
 import homeBanner from "./home_banner_img.png";
-import download_img from "./download_img.svg";
+import download_img from "./download_img.png";
 import app_store_img from "./app_store_img.png";
 import play_store_img from "./play_store_img.png";
 import banner_img from "./banner_img.jpg";
-import user from "./user.png"
+import user from "./user.png";
 
 export const assets = {
   logo,
@@ -112,7 +112,7 @@ export const assets = {
   app_store_img,
   play_store_img,
   banner_img,
-  user
+  user,
 };
 
 export const offerProducts = [

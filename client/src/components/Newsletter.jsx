@@ -22,7 +22,7 @@ const Newsletter = () => {
               to="/collection"
               className="btn max-w-xs w-full sm:w-auto bg-black text-white text-sm sm:text-base font-medium hover:bg-black outline-none border-none"
             >
-              Shop Now
+              Subscribe
             </button>
           </form>
         </div>

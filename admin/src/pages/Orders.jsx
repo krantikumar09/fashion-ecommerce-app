@@ -35,7 +35,7 @@ const Orders = ({ token }) => {
   const statusHandler = async (event, orderId) => {
     try {
       const res = await axios.post(
-        backendUrl + "api/order/status",
+        backendUrl + "/api/order/status",
         { orderId, status: event.target.value },
         { headers: { token } }
       );

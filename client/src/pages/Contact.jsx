@@ -10,9 +10,10 @@ const Contact = () => {
 
         <div className="mt-16 flex flex-col justify-center md:flex-row gap-10 mb-28">
           <img
-            className="w-full md:max-w-[480px]"
+            className="w-full md:max-w-[480px] rounded-xl"
             src={assets.contact_img}
             alt=""
+            loading="lazy"
           />
 
           <div className="flex flex-col justify-center items-start gap-6">

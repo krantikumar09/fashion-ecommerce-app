@@ -122,6 +122,7 @@ const Navbar = () => {
                 src={assets.search_icon}
                 alt="search"
                 className="w-4 sm:w-5 cursor-pointer me-6"
+                loading="lazy"
               />
             )}
             {token ? (
@@ -131,6 +132,7 @@ const Navbar = () => {
                     src={assets.profile_icon}
                     className="w-4 sm:w-5 cursor-pointer"
                     alt="user"
+                    loading="lazy"
                   />
                   <div className="group-hover:block hidden absolute droupdown-menu right-0 pt-4">
                     <div className="flex flex-col gap-2 w-36 py-3 px-5 text-navbar-text bg-white shadow-xl rounded-md">
@@ -160,6 +162,7 @@ const Navbar = () => {
                     src={assets.cart_icon}
                     alt="cart"
                     className="w-4 sm:w-5 min-w-4 cursor-pointer"
+                    loading="lazy"
                   />
                   <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
                     {getCartCount()}

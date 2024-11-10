@@ -55,7 +55,8 @@ const Cart = () => {
                       <img
                         className="w-16 sm:w-20"
                         src={productData.image[0]}
-                        alt=""
+                        alt={productData.name}
+                        loading="lazy"
                       />
 
                       <div>
@@ -96,6 +97,7 @@ const Cart = () => {
                       className="w-4 mr-4 cursor-pointer"
                       src={assets.bin_icon}
                       alt="bin"
+                      loading="lazy"
                     />
                   </div>
                 );
@@ -107,7 +109,7 @@ const Cart = () => {
                 <div className="w-full text-end mt-6">
                   <button
                     onClick={() => navigate("/place-order")}
-                    className=" btn btn-sm sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none uppercase"
+                    className="btn sm:btn-md bg-black text-white text-sm sm:text-base font-medium hover:bg-black outline-none border-none capitalize"
                   >
                     procced to checkout
                   </button>

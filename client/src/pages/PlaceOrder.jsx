@@ -5,9 +5,13 @@ import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+4;
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState("");
+  const [loadingBtn, setLoadingBtn] = useState("Place Order");
 
   const {
     navigate,
@@ -56,6 +60,7 @@ const PlaceOrder = () => {
           );
 
           if (data.success) {
+            setLoadingBtn("Done");
             navigate("/orders");
             setCartItems({});
           }
@@ -72,12 +77,14 @@ const PlaceOrder = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setLoadingBtn("Loading");
 
     try {
       let orderItems = [];
 
       if (method === "") {
         toast.error("Please select payment method!");
+        setLoadingBtn("Place Order");
       }
 
       for (const items in cartItems) {
@@ -129,6 +136,7 @@ const PlaceOrder = () => {
           if (resStripe.data.success) {
             const { session_url } = resStripe.data;
             window.location.replace(session_url);
+            setLoadingBtn("Done");
           } else {
             toast.error(resStripe.data.message);
           }
@@ -154,6 +162,7 @@ const PlaceOrder = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+      setLoadingBtn("Try again");
     }
   };
 
@@ -281,28 +290,40 @@ const PlaceOrder = () => {
                 <p className="text-sm sm:text-base text-black font-medium mb-2">
                   Payment option:
                 </p>
-                <div  className="flex flex-col items-start xs:flex-row sm:items-center gap-3">
+                <div className="flex flex-col items-start xs:flex-row sm:items-center gap-3">
                   <div
                     onClick={() => setMethod("stripe")}
-                    className={`flex items-center text-xs xs:text-sm sm:text-base gap-3 p-2 px-3 cursor-pointer btn w-full xs:w-auto outline-none border-slate-500 bg-transparent  ${method === "stripe" ? "!bg-gold !border-gold" : ""}`}
+                    className={`flex items-center text-xs xs:text-sm sm:text-base gap-3 p-2 px-3 cursor-pointer btn w-full xs:w-auto outline-none border-slate-500 bg-transparent  ${
+                      method === "stripe" ? "!bg-gold !border-gold" : ""
+                    }`}
                   >
-                    <img className="h-5" src={assets.stripe_logo} alt="" />
+                    <img
+                      className="h-5"
+                      src={assets.stripe_logo}
+                      alt=""
+                      loading="lazy"
+                    />
                   </div>
 
                   <div
                     onClick={() => setMethod("razorpay")}
-                    className={`flex items-center text-xs xs:text-sm sm:text-base gap-3 p-2 px-3 cursor-pointer btn w-full xs:w-auto outline-none border-slate-500 bg-transparent  ${method === "razorpay" ? "!bg-gold !border-gold" : ""}`}
+                    className={`flex items-center text-xs xs:text-sm sm:text-base gap-3 p-2 px-3 cursor-pointer btn w-full xs:w-auto outline-none border-slate-500 bg-transparent  ${
+                      method === "razorpay" ? "!bg-gold !border-gold" : ""
+                    }`}
                   >
                     <img
                       className="h-5"
                       src={assets.razorpay_logo}
                       alt=""
+                      loading="lazy"
                     />
                   </div>
 
                   <div
                     onClick={() => setMethod("cod")}
-                    className={`flex items-center text-xs xs:text-sm sm:text-base gap-3 p-2 px-3 cursor-pointer btn w-full xs:w-auto outline-none border-slate-500 bg-transparent  ${method === "cod" ? "!bg-gold !border-gold" : ""}`}
+                    className={`flex items-center text-xs xs:text-sm sm:text-base gap-3 p-2 px-3 cursor-pointer btn w-full xs:w-auto outline-none border-slate-500 bg-transparent  ${
+                      method === "cod" ? "!bg-gold !border-gold" : ""
+                    }`}
                   >
                     <p className="capitalize text-sm text-black font-medium">
                       cash on delivery
@@ -311,15 +332,31 @@ const PlaceOrder = () => {
                 </div>
               </div>
 
-              <div className="w-full text-end mt-8">
+              {loadingBtn === "Loading" ? (
                 <button
                   type="submit"
-                  // onClick={() => navigate("/orders")}
-                  className="w-full btn sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none uppercase "
+                  className="w-full mt-8 btn sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none capitalize "
                 >
-                  place order
+                  <span className="loading loading-spinner loading-sm bg-white"></span>
+                  Processing...
                 </button>
-              </div>
+              ) : loadingBtn === "Done" ? (
+                <button
+                  type="submit"
+                  className="w-full mt-8 btn sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none capitalize "
+                >
+                  <FontAwesomeIcon icon={faCheck} />
+                  Done
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full mt-8 btn sm:btn-md bg-black text-white text-xs xs:text-sm sm:text-base font-medium hover:bg-black outline-none border-none capitalize "
+                >
+                  <FontAwesomeIcon icon={faCartShopping} />
+                  Place Order
+                </button>
+              )}
             </div>
           </div>
         </form>

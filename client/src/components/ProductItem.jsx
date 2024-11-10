@@ -13,6 +13,7 @@ const ProductItem = ({ id, image, name, price }) => {
             className="w-full h-full object-cover hover:scale-110 ease-in-out trasition  transition-transform duration-300"
             src={image[0]}
             alt={name}
+            loading="lazy"
           />
         </figure>
         <div className="card-body">
