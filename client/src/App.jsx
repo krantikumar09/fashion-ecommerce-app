@@ -16,10 +16,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Verify from "./pages/Verify";
 import MyProfile from "./pages/MyProfile";
 import SpecialProduct from "./pages/SpecialProduct";
+import ConnectionStatusNotification from "./components/ConnectionStatusNotification";
 
 const App = () => {
   return (
     <div className="App">
+      <ConnectionStatusNotification/>
       <ToastContainer />
       <Navbar />
       <SearchBar />
