@@ -17,6 +17,7 @@ import Verify from "./pages/Verify";
 import MyProfile from "./pages/MyProfile";
 import SpecialProduct from "./pages/SpecialProduct";
 import ConnectionStatusNotification from "./components/ConnectionStatusNotification";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/Verify" element={<Verify />} />
         <Route path="/special/:categoryName" element={<SpecialProduct />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </div>
