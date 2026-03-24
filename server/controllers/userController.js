@@ -2,6 +2,9 @@ import validator from "validator";
 import userModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { OAuth2Client } from "google-auth-library";
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
@@ -16,6 +19,13 @@ const loginUser = async (req, res) => {
 
     if (!user) {
       return res.json({ success: false, message: "User doesn't exists!" });
+    }
+
+    if (!user.password) {
+      return res.json({
+        success: false,
+        message: "Please login with Google",
+      });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -103,4 +113,61 @@ const adminLogin = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser, adminLogin };
+const googleLogin = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    // Verify token with :contentReference[oaicite:0]{index=0}
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { sub, name, email, picture } = payload;
+
+    // Check if user exists
+    let user = await userModel.findOne({ email });
+
+    if (!user) {
+      // Generate a random hash so required password validation passes for OAuth users.
+      const randomPassword = `${sub}${Date.now()}`;
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(randomPassword, salt);
+
+      // Create new Google user
+      user = await userModel.create({
+        name,
+        email,
+        googleId: sub,
+        picture,
+        password: hashedPassword,
+      });
+    } else {
+      // Link Google account if not already linked
+      if (!user.googleId) {
+        user.googleId = sub;
+        await user.save();
+      }
+    }
+
+    // Generate JWT (FIXED)
+    const jwtToken = createToken(user._id);
+
+    res.json({
+      success: true,
+      token: jwtToken,
+      message: "Google login successful",
+      user,
+    });
+
+  } catch (err) {
+    console.error("Google Login Error:", err);
+    res.status(401).json({
+      success: false,
+      message: "Google login failed",
+    });
+  }
+};
+
+export { loginUser, registerUser, adminLogin, googleLogin };

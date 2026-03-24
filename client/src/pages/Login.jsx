@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
 import { ShopContext } from "../context/ShopContext";
+import { GoogleLogin } from '@react-oauth/google';
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -37,7 +38,7 @@ const Login = () => {
         if (res.data.success) {
           setToken(res.data.token);
           localStorage.setItem("token", res.data.token);
-          navigate("/");
+          navigate("/get-started");
           toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
@@ -56,6 +57,7 @@ const Login = () => {
   }, [token]);
 
   return (
+    
     <form
       onSubmit={onSubmitHandler}
       className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-8 gap-4 text-navbar-text min-h-screen"
@@ -158,6 +160,33 @@ const Login = () => {
       <button className="btn bg-black text-white w-full mt-4 text-sm sm:text-base  border-none hover:bg-black">
         {currentState === "Login" ? "Sign In" : "Sign Up"}
       </button>
+
+      <div className="w-full flex flex-col justify-center items-center gap-2 mb-4">
+        <p className="text-sm font-normal text-black">or continue with</p>
+        <GoogleLogin
+          onSuccess={async (credentialResponse) => {
+            console.log(credentialResponse.credential);
+            try {
+              const res = await axios.post(
+                backendUrl + "/api/user/google",
+                {
+                  token: credentialResponse.credential,
+                }
+              );
+
+              // Store token (same as your normal login)
+              localStorage.setItem("token", res.data.token);
+              localStorage.setItem("user", JSON.stringify(res.data.user));
+
+              window.location.href = "/";
+
+            } catch (err) {
+              console.error(err);
+            }
+          }}
+          onError={() => console.log("Login Failed")}
+        />  
+      </div>        
     </form>
   );
 };
