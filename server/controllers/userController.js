@@ -15,18 +15,19 @@ const loginUser = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      res.json({ success: false, message: "User doesn't exists!" });
+      return res.json({ success: false, message: "User doesn't exists!" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-
-    if (isMatch) {
-      const token = createToken(user._id);
-      res.json({ success: true, token, message: "Loged in!" });
+    if (!isMatch) {
+      return res.json({ success: false, message: "Invalid credentials!" });
     }
+
+    const token = createToken(user._id);
+    return res.json({ success: true, token, message: "Logged in!" });
   } catch (error) {
     console.log("Login error: ", error);
-    res.json({
+    return res.json({
       success: false,
       message: "Something went wrong! Please try again.",
     });
@@ -87,18 +88,19 @@ const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (email == process.env.ADMIN_EMAIL && password == process.env.ADMIN_PASSWORD) {
-      const token = jwt.sign(email+password, process.env.JWT_SECRET);
-      res.json({ success: true, token, message: "Admin loged in!"});
-    }else {
-      res.json({ success: false, message: "Invalid credentials!"});
+    if (
+      email == process.env.ADMIN_EMAIL &&
+      password == process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign(email + password, process.env.JWT_SECRET);
+      res.json({ success: true, token, message: "Admin loged in!" });
+    } else {
+      res.json({ success: false, message: "Invalid credentials!" });
     }
   } catch (error) {
     console.log("Admin: ", error);
-    res.json({ success: false, message: "Something went wrong!"})
+    res.json({ success: false, message: "Something went wrong!" });
   }
 };
-
-
 
 export { loginUser, registerUser, adminLogin };
